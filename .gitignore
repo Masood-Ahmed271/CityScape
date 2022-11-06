@@ -13,9 +13,9 @@
 
 # Training Files
 # /cityscape/cityscape_backend/trained_cfg.pickle
-.output
+output
 /cityscape/cityscape_backend/__pycache__
-.window_labeling_coco
+window_labeling_coco
 
 # misc
 .DS_Store
