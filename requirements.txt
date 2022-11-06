@@ -1,0 +1,24 @@
+
+Videos Referred To:
+	For connecting backend and frontend:
+		https://www.youtube.com/watch?v=YW8VG_U-m48
+	For running the feed from webcam:
+		https://www.youtube.com/watch?v=vF9QRJwJXJk
+
+
+
+Install following dependencies:
+
+npm install antd
+npm install react-router-dom
+npm install video-react
+npm install react-tsparticles
+npm install tsparticles
+
+Important Thing:
+
+Always run after making changes:
+	npm run build
+in the react frontend folder
+then run the app in the backend by:
+	python3 App.py

@@ -1,0 +1,29 @@
+#components-layout-demo-side {
+    height: 32px;
+    margin: 16px;
+    background: #ffffff;
+}
+  
+.site-layout .site-layout-background {
+    background: #EFF3FD;
+}
+
+.sideBar {
+    background: #ffffff;
+}
+
+.ant-menu-item-selected {
+    color: #00DEA3 !important;
+}
+
+.menuFooter{
+    border-radius: 20%;
+    margin: 5%;
+    text-align: center;
+    position: relative;
+    bottom: -45%;
+}
+
+.ant-btn:hover, .ant-btn:focus {
+    color: #00DEA3;
+  }

@@ -1,0 +1,29 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/cityscape/cityscape_frontend/node_modules
+/cityscape/cityscape_frontend/.pnp
+/cityscape/cityscape_frontend/.pnp.js
+
+# testing
+/cityscape/cityscape_frontend/coverage
+
+# production
+/cityscape/cityscape_frontend/build
+
+# Training Files
+# /cityscape/cityscape_backend/trained_cfg.pickle
+.output
+/cityscape/cityscape_backend/__pycache__
+.window_labeling_coco
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
