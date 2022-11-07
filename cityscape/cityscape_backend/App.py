@@ -19,8 +19,8 @@ import pickle
 from detectron2.utils.visualizer import Visualizer, ColorMode
 
 #Importing Pyrealsense Processing libraries
-# import pyrealsense2
-# from realsense_depth import *
+import pyrealsense2
+from realsense_depth import *
 
 import flask
 from flask import Flask
@@ -111,6 +111,54 @@ def runOperations():
 
     # onRealSenseViewer(predictor)
 
+
+def onRealSense():
+
+    # Getting the trained file
+    pathSaveCFG = "./trained_cfg.pickle"
+
+    # Opeining the file for reading and loading it into the configuration file
+    with open(pathSaveCFG, 'rb') as f:
+        cfg = pickle.load(f)
+
+    # To load the  wights that we had defined
+    cfg.MODEL.WEIGHTS = os.path.join(cfg.OUTPUT_DIR,"model_final.pth")
+
+    # Threshold for the detetcion
+    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5
+
+    # Passing the configuration to our predictor to predict
+    predictor = DefaultPredictor(cfg)
+
+    # initializing the depth camera
+    depthCamera = DepthCamera()
+
+    # An infinite loop 
+    while True:
+        
+        # Getting depth frame anc color frame for further processing
+        _, depthFrame, colorFrame = depthCamera.get_frame()
+        # Doing prediction on the input given from the RealSense camera
+        image = colorFrame
+        predictions = predictor(image)
+
+        # passing the image to the visualiser
+        visualizer = Visualizer(
+            image[:,:,::-1], metadata={}, scale=0.5, instance_mode=ColorMode.SEGMENTATION)
+        
+        # Drawing all instances on the image
+
+        vis = visualizer.draw_instance_predictions(
+            predictions["instances"].to("cpu"))
+
+        ret,buffer=cv2.imencode('.jpg',vis.get_image()[:,:,::-1])
+        frame=buffer.tobytes()
+
+        yield(b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+
+
 def generate_frames():
     while True:
             
@@ -133,9 +181,13 @@ def index():
 # def video():
 #     return flask.Response(generate_frames(),mimetype='multipart/x-mixed-replace; boundary=frame')
 
+# @app.route('/video')
+# def video():
+#     return flask.Response(runOperations(),mimetype='multipart/x-mixed-replace; boundary=frame')
+
 @app.route('/video')
 def video():
-    return flask.Response(runOperations(),mimetype='multipart/x-mixed-replace; boundary=frame')
+    return flask.Response(onRealSense(),mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == "__main__":
     # app.run(debug=True)
