@@ -19,9 +19,9 @@ import pickle
 from detectron2.utils.visualizer import Visualizer, ColorMode
 
 #Importing Pyrealsense Processing libraries
-import pyrealsense2
-from realsense_depth import *
-import roboticarm
+# import pyrealsense2
+# from realsense_depth import *
+# import roboticarm
 
 import flask
 from flask import Flask
@@ -377,6 +377,31 @@ def video():
 # @app.route('/video')
 # def video():
 #     return flask.Response(onRealSenseWithoutSendingCoordinates()(),mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+@app.route('/up')
+def up():
+    return {"Status" : "up"}
+
+@app.route('/down')
+def down():
+    return {"Status" : "down"}
+
+@app.route('/left')
+def left():
+    return {"Status" : "left"}
+
+@app.route('/right')
+def right():
+    return {"Status" : "right"}
+
+@app.route('/depthin')
+def depthIn():
+    return {"Status" : "depthin"}
+
+@app.route('/depthout')
+def depthOut():
+    return {"Status" : "depthout"}
 
 if __name__ == "__main__":
     # app.run(debug=True)
