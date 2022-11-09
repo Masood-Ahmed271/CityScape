@@ -356,3 +356,19 @@ def getmappedcoordinatesmultiple(finalArray):
 
 def viewer():
     pass
+
+def movement(direction):
+    if direction == 'up':
+        pass
+    elif direction == 'down':
+        pass
+    elif direction == 'left':
+        pass
+    elif direction == 'right':
+        pass
+    elif direction == 'in':
+        pass
+    elif direction == 'out':
+        pass
+    else:
+        print("Direction given is wrong!")

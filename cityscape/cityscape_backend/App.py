@@ -21,7 +21,7 @@ from detectron2.utils.visualizer import Visualizer, ColorMode
 #Importing Pyrealsense Processing libraries
 # import pyrealsense2
 # from realsense_depth import *
-# import roboticarm
+import roboticarm
 
 import flask
 from flask import Flask
@@ -381,26 +381,32 @@ def video():
 
 @app.route('/up')
 def up():
+    roboticarm.movement('up')
     return {"Status" : "up"}
 
 @app.route('/down')
 def down():
+    roboticarm.movement('down')
     return {"Status" : "down"}
 
 @app.route('/left')
 def left():
+    roboticarm.movement('left')
     return {"Status" : "left"}
 
 @app.route('/right')
 def right():
+    roboticarm.movement('right')
     return {"Status" : "right"}
 
 @app.route('/depthin')
 def depthIn():
+    roboticarm.movement('in')
     return {"Status" : "depthin"}
 
 @app.route('/depthout')
 def depthOut():
+    roboticarm.movement('out')
     return {"Status" : "depthout"}
 
 if __name__ == "__main__":
