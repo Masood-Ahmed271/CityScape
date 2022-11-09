@@ -16,11 +16,15 @@ from detectron2.engine import DefaultPredictor      # To use the predictor of de
 import os
 import pickle
 
+# for opening ssh connection
+import paramiko
+
+
 from detectron2.utils.visualizer import Visualizer, ColorMode
 
 #Importing Pyrealsense Processing libraries
-# import pyrealsense2
-# from realsense_depth import *
+import pyrealsense2
+from realsense_depth import *
 import roboticarm
 
 import flask
@@ -408,6 +412,20 @@ def depthIn():
 def depthOut():
     roboticarm.movement('out')
     return {"Status" : "depthout"}
+
+@app.route('/ssh_connection')
+def sshConnection():
+    ip = None
+    username = 'ubuntu'
+    connection_password = 'mycobotpi'
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    client.connect(ip, username=username, password=connection_password)
+    session = client.get_transport().open_session()
+    if session.active:
+        session.exec_command('./run.sh')
+        print(session.recv(1024))
+    client.close()
 
 if __name__ == "__main__":
     # app.run(debug=True)
