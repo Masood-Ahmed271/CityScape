@@ -119,7 +119,7 @@ Open 2 terminals and go to the right directory.
 In one terminal write the following command where the ipaddress can be found using ifconfig on the terminal (Note -> Both the roboic hand and Machine running the code should be connected to the same wifi.):
 
 ```terminal/cmd
-ssh@ubuntu@'ipaddress'
+ssh ubuntu@'ipaddress'
 ./run.sh
 ```
 
