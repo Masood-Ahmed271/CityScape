@@ -1,8 +1,6 @@
-opyright (c) <YEAR>, <OWNER>
+Copyright (c) 2022, CityScape
 All rights reserved.
 
-Chicken Dance License v0.2
-http://supertunaman.com/cdl/
 
 Redistribution and use in source and binary forms, with 
 or without modification, are permitted provided that the 
